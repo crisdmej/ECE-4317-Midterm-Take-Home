@@ -9,6 +9,8 @@ while (int(heap) <= 0):
 arr = []
 for x in range(0, int(heap)):
     sticks = input("Enter the number of sticks in heap " + str(x+1) + ": ")
+    while(int(sticks) < 0):
+        sticks = input("Please enter a postive number of sticks in heap " + str(x+1) + ": ")
     arr.append(int(sticks))
 for stick in list(arr):
     xor = xor ^ stick
