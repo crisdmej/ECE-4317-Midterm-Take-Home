@@ -1,4 +1,5 @@
 from queen import Queen
+import sys
 import pygame
 from pygame.locals import *
 
