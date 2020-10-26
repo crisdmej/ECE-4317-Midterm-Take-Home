@@ -1,6 +1,6 @@
 #Nim game 
 
-win = False;
+win = False
 xor = 0
 exception = 0
 heap = input("Please enter the size of the heap: ")
