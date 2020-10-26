@@ -4,6 +4,8 @@ win = False;
 xor = 0
 exception = 0
 heap = input("Please enter the size of the heap: ")
+while (int(heap) <= 0):
+    heap = input("PLease eneter a number greater than 0: ")
 arr = []
 for x in range(0, int(heap)):
     sticks = input("Enter the number of sticks in heap " + str(x+1) + ": ")
