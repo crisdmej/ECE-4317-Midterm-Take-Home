@@ -103,30 +103,37 @@ screen.fill((255,255,255))
 text = pygame.font.Font(None, 36)
 queenImage = pygame.image.load('queen.png')
 
-cnt = 0
-for i in range(1,boardLength+1):
-    for z in range(1,boardLength+1):
-        #check if current loop value is even
-        if cnt % 2 == 0:
-            pygame.draw.rect(screen, lb,[size*z,size*i,size,size])
-        else:
-            pygame.draw.rect(screen, db, [size*z,size*i,size,size])
+def display_board():
+    cnt = 0
+    for i in range(1,boardLength+1):
+        for z in range(1,boardLength+1):
+            #check if current loop value is even
+            if cnt % 2 == 0:
+                pygame.draw.rect(screen, lb,[size*z,size*i,size,size])
+            else:
+                pygame.draw.rect(screen, db, [size*z,size*i,size,size])
 
-        number = text.render(str(heuristicBoard[i-1][z-1]), True, black)
-        screen.blit(number,(size*z+5,size*i+5))
+            number = text.render(str(heuristicBoard[i-1][z-1]), True, black)
+            screen.blit(number,(size*z+5,size*i+5))
 
-        for queensToDraw in range(len(queens)):
-            qRow = queens[queensToDraw].getOriginalRow()
-            qCol = queens[queensToDraw].getOriginalCol()
+            for queensToDraw in range(len(queens)):
+                qRow = queens[queensToDraw].getOriginalRow()
+                qCol = queens[queensToDraw].getOriginalCol()
 
-            if(i-1 == qRow and z-1 == qCol):
-                screen.blit(queenImage, (size*z+30,size*i+30))
-        cnt +=1
-    #since theres an even number of squares go back one value
-    #screen.blit(number,(size*i,size*z))
-    cnt-=1
-#Add a nice boarder
-pygame.draw.rect(screen,black,[size,size,boardLength*size,boardLength*size],1)
+                if(i-1 == qRow and z-1 == qCol):
+                    screen.blit(queenImage, (size*z+30,size*i+30))
+            cnt +=1
+        #since theres an even number of squares go back one value
+        #screen.blit(number,(size*i,size*z))
+        cnt-=1
+    #Add a nice boarder
+    pygame.draw.rect(screen,black,[size,size,boardLength*size,boardLength*size],1)
 
-#while(1):
-#    pygame.display.update()
+    while True:
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
+        pygame.display.update()
+
+display_board()
