@@ -1,9 +1,8 @@
 from queen import Queen
-import sys
 import pygame
+import sys
 from pygame.locals import *
 
-foundDuplicate = False
 
 board = [[0, 0, 0, 0, 0, 0, 0, 0],
          [0, 0, 0, 0, 0, 0, 0, 0],
@@ -53,7 +52,7 @@ for column in range(8):
         board[7][column-1] = 0
         board[queens[column-1].getOriginalRow()][queens[column-1].getOriginalCol()] = column
         queens[column-1].setPosition(queens[column-1].getOriginalRow(),
-                                        queens[column-1].getOriginalCol()) #rowPos, colPos is fixed
+                                        queens[column-1].getOriginalCol())
 
     lastRPos = queens[column].originalRow #last known position of current column was original spot
     lastCPos = queens[column].originalCol
@@ -68,10 +67,10 @@ for column in range(8):
         heuristic = 0
         for j in range(len(queens)): #for the entire queen list, find the hits
             queenHitList = []
-            queenHitList = queens[j].findHitPairs(board) #might need reinitialization
-            heuristic = len(queenHitList) + heuristic
+            queenHitList = queens[j].findHitPairs(board) #checks all combinations of queens hit
+            heuristic = len(queenHitList) + heuristic #calculates the number of direct/indirect queen hits
         #..................................................................................................
-        heuristicBoard[row][column] = heuristic
+        heuristicBoard[row][column] = heuristic #places the heuristic value in correct (row, column)
 
         lastRPos = row
         lastCPos = column
@@ -92,8 +91,8 @@ screen = pygame.display.set_mode((S_WIDTH, S_LENGTH))
 pygame.display.set_caption("Chessboard")
 
 size = 70
-lb = (209, 196, 132)
-db = (122, 105, 18)
+lb = (222, 184, 134)
+db = (152, 99, 59)
 black = (0,0,0)
 white= (255,255,255)
 
@@ -103,7 +102,6 @@ screen.fill((255,255,255))
 
 text = pygame.font.Font(None, 36)
 queenImage = pygame.image.load('queen.png')
-
 def display_board():
     cnt = 0
     for i in range(1,boardLength+1):
